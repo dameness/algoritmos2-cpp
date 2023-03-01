@@ -16,6 +16,8 @@ void exibir(float vetor[], int tamanho);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
+    srand(time(NULL));
+
     float vet[tam], vet_ceil[tam], vet_floor[tam], vet_round[tam];
 
     cout << fixed;

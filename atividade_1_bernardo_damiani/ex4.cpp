@@ -14,6 +14,7 @@ Após gerar o vetor o programa deverá:
 - Exibir o percentual de valores pares e o percentual de valores ímpares no vetor
 - Exibir a média dos valores do vetor com duas casas decimais.
 */
+
 void exibir(int vetor[], int tamanho);
 void ordenar(int vetor[], int tamanho);
 int main()

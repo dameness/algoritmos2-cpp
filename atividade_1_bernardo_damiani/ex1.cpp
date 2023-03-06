@@ -28,7 +28,7 @@ int main()
             system("pause");
         }
 
-    }while(valor==3 || valor<2);
+    }while(valor==3 || valor<2);//ordem do exercício considera o 3 inválido
 
     n200 = valor / 200;
     valor %= 200;

@@ -7,7 +7,7 @@ Escreva um programa que simule um caixa eletrônico que dispõe das seguintes nota
 o saque, deverá apresentar a quantidade e quais notas devem ser entregues, sempre
 priorizando as notas maiores.
 Não é permitido saque de valores menores que 2 e igual a 3 os demais valores é possível
-realizar o saque:
+realizar o saque.
 */
 int main()
 {

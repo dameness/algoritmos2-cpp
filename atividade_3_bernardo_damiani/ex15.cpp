@@ -18,6 +18,9 @@ OBS: as ações 1, 2 e 3 do menu devem acionar as respectivas funções que deverão 
 ações solicitadas em cada item. Ao escolher opção inválida no menu deve exibir mensagem com
 tal informação.
 */
+
+// CUIDAR : NÃO ERA NECESSÁRIO USAR ESTE PONTEIRO!! --> vetor é sempre passado como parâmetro por referência e modificado
+
 void gerar(int arr[], int tam);
 void mostrar1D(int arr[], int tam);
 void intersec(int arr1[], int arr2[], int *arrIntersec, int tam, int &cont);

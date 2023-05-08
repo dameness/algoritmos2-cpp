@@ -49,7 +49,8 @@ void relatorio(int *vet, int tam)
         if( *(vet+i) % 2 != 0 )
         {
             printf("número %d na posição %d\n", *(vet+i), i);
-            *pt += 1; //"*pt++" é equivalente a "*pt" seguido de "pt = pt + 1". --> nao usar
+            *pt += 1; //"*pt++" não funcionaria pois o operador '++' tem prioridade em relação a '*'
+            //portanto *pt++ == *(pt++), para o resultado de *pt += 1, usar *(pt)++
         }
     }
     printf("Quantidade de ímpares: %d\n", *pt);

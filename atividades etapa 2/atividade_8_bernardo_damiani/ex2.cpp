@@ -50,7 +50,7 @@ void relatorio(int *vet, int tam)
         {
             printf("número %d na posição %d\n", *(vet+i), i);
             *pt += 1; //"*pt++" não funcionaria pois o operador '++' tem prioridade em relação a '*'
-            //portanto *pt++ == *(pt++), para o resultado de *pt += 1, usar *(pt)++
+            //portanto *pt++ == *(pt++), para o resultado de *pt += 1, usar *(pt)++.
         }
     }
     printf("Quantidade de ímpares: %d\n", *pt);

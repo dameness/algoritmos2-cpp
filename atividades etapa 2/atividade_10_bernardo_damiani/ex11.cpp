@@ -2,19 +2,19 @@
 using namespace std;
 
 /*
-Crie um programa que receba do usuário a informação de quantos números deseja digitar, a seguir
-o programa deverá receber os números e apresentar na tela:
-- Total de números pares digitados
-- Percentual de números ímpares digitados
-- Média dos números digitados com duas casas decimais
-- Maior número digitado e em qual digitação ele foi informado.
+Crie um programa que receba do usuÃ¡rio a informaÃ§Ã£o de quantos nÃºmeros deseja digitar, a seguir
+o programa deverÃ¡ receber os nÃºmeros e apresentar na tela:
+- Total de nÃºmeros pares digitados
+- Percentual de nÃºmeros Ã­mpares digitados
+- MÃ©dia dos nÃºmeros digitados com duas casas decimais
+- Maior nÃºmero digitado e em qual digitaÃ§Ã£o ele foi informado.
 
-A partir de agora os exercícios não devem mais usar declaração de variáveis.
+A partir de agora os exercÃ­cios nÃ£o devem mais usar declaraÃ§Ã£o de variÃ¡veis.
 */
 
 void qtd(int **pn)
 {
-    cout << "\nQuantos números você deseja digitar? ";
+    cout << "\nQuantos nÃºmeros vocÃª deseja digitar? ";
     cin >> **pn;
 }
 void ParOuImpar(int **arr, int **pn)
@@ -32,7 +32,9 @@ void ParOuImpar(int **arr, int **pn)
 
     *Imp = ((*Imp) * 100.0) / (**pn);
 
-    printf("\nTotal de números pares digitados: %d\n\nPercentual de números ímpares digitados: %.2f%%\n", *contPar, *Imp);
+    printf("\nTotal de nÃºmeros pares digitados: %d\n\nPercentual de nÃºmeros Ã­mpares digitados: %.2f%%\n", *contPar, *Imp);
+
+    delete contPar, Imp;
 }
 void media(int **arr, int **pn)
 {
@@ -43,7 +45,9 @@ void media(int **arr, int **pn)
 
     *m = (*m)/(**pn);
 
-    printf("\nMédia dos números digitados com duas casas decimais: %.2f\n", *m);
+    printf("\nMÃ©dia dos nÃºmeros digitados com duas casas decimais: %.2f\n", *m);
+
+    delete m;
 }
 void maior(int **arr, int **pn)
 {
@@ -59,7 +63,9 @@ void maior(int **arr, int **pn)
         }
     }
 
-    printf("\nMaior número: %d\nDigitação na qual foi informado o maior número: %d\n\n", *maior, (*maiorPos)+1);
+    printf("\nMaior nÃºmero: %d\nDigitaÃ§Ã£o na qual foi informado o maior nÃºmero: %d\n\n", *maior, (*maiorPos)+1);
+
+    delete maior, maiorPos;
 }
 
 void resultado(int *pn)
@@ -77,6 +83,8 @@ void resultado(int *pn)
     media(&arr, &pn);
     maior(&arr, &pn);
 
+    delete arr;
+
 }
 main()
 {
@@ -86,5 +94,5 @@ main()
 
     resultado(pn);
 
+    delete pn;
 }
-

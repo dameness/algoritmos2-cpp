@@ -6,8 +6,8 @@ using namespace std;
 
 /*
 Escrever um programa que gere um vetor V[20] com valores no intervalo de 0 a 100 e mostre os
-valores gerados. Modifique o vetor de modo que o primeiro elemento passe para a última posição, e
-desloque todos os outros elementos uma posição para a esquerda.
+valores gerados. Modifique o vetor de modo que o primeiro elemento passe para a Ãºltima posiÃ§Ã£o, e
+desloque todos os outros elementos uma posiÃ§Ã£o para a esquerda.
 */
 void exibir(int *arr)
 {
@@ -45,6 +45,8 @@ void gerar(int *arr)
            (*i)++;
        }
    }
+
+   delete i, x, ok;
 }
 void troca(int *arr)
 {
@@ -60,26 +62,28 @@ void troca(int *arr)
         arr[*i+1] = *aux;
 
         (*i)++;
-    }//o vetor todo se deslocou para a esquerda, o que resulta em lixo de memória para a última posição
-    // além disso, o valor primeira posição inicial desaparece do vetor
-    //portanto, este valor foi reservado e agora será inserido na última posição
+    }//o vetor todo se deslocou para a esquerda, o que resulta em lixo de memÃ³ria para a Ãºltima posiÃ§Ã£o
+    // alÃ©m disso, o valor primeira posiÃ§Ã£o inicial desaparece do vetor
+    //portanto, este valor foi reservado e agora serÃ¡ inserido na Ãºltima posiÃ§Ã£o
 
     arr[n-1] = *primeiroTermo;
+
+    delete i, aux, primeiroTermo;
 }
 main()
 {
     setlocale(LC_ALL, "Portuguese");
     srand(time(NULL));
 
-    int *arr = new int[n];// n é uma constante inteira que vale 20
+    int *arr = new int[n];// n Ã© uma constante inteira que vale 20
 
     gerar(arr);
     cout << "Vetor inicial: ";
     exibir(arr);
     troca(arr);
-    cout << "Vetor após a troca: ";
+    cout << "Vetor apÃ³s a troca: ";
     exibir(arr);
 
+    delete arr;
 
 }
-

@@ -5,10 +5,10 @@ using namespace std;
 #define n 10
 
 /*
-Escreva um programa que manipule um vetor de inteiros de 10 posições, o vetor deverá ser
-preenchido de forma pseudoaleatória com valores entre 30 e 55, sem números repetidos, mostrar o vetor
-gerado na tela, realizar a troca dos valores no vetor de tal forma que o primeiro passa a ser o último, o
-segundo o penúltimo e assim sucessivamente. Mostre o vetor na tela após as trocas, utilize aritmética de
+Escreva um programa que manipule um vetor de inteiros de 10 posiÃ§Ãµes, o vetor deverÃ¡ ser
+preenchido de forma pseudoaleatÃ³ria com valores entre 30 e 55, sem nÃºmeros repetidos, mostrar o vetor
+gerado na tela, realizar a troca dos valores no vetor de tal forma que o primeiro passa a ser o Ãºltimo, o
+segundo o penÃºltimo e assim sucessivamente. Mostre o vetor na tela apÃ³s as trocas, utilize aritmÃ©tica de
 ponteiro para percorrer o vetor.
 */
 void exibir(int *arr)
@@ -47,6 +47,8 @@ void gerar(int *arr)
            (*i)++;
        }
    }
+
+   delete i, x, ok;
 }
 void troca(int *arr)
 {
@@ -62,27 +64,31 @@ void troca(int *arr)
         *arrAux = *aux;
 
         arrAux--; // volta  1 posicao;
-        arr++;// avança uma posição
+        arr++;// avanÃ§a uma posiÃ§Ã£o
 
         (*i)++;
     }
     arr-=(*i);
 
+    delete i, aux, arrAux;
 }
 main()
 {
     setlocale(LC_ALL, "Portuguese");
     srand(time(NULL));
 
-    int *arr = new int[n];// n é uma constante inteira que vale 10
+    int *arr = new int[n];// n Ã© uma constante inteira que vale 10
 
     gerar(arr);
     cout << "Vetor inicial: ";
     exibir(arr);
-    troca(arr);//aritmética de ponteiros foi usada nas trocas
-    cout << "Vetor após a troca: ";
+    troca(arr);//aritmÃ©tica de ponteiros foi usada nas trocas
+    cout << "Vetor apÃ³s a troca: ";
     exibir(arr);
 
+    delete arr;
 
 }
+
+
 

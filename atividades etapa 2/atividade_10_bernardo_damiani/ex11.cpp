@@ -83,7 +83,7 @@ void resultado(int *pn)
     media(&arr, &pn);
     maior(&arr, &pn);
 
-    delete arr;
+    delete[] arr;
 
 }
 main()

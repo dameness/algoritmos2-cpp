@@ -71,6 +71,7 @@ void troca(int *arr)
     arr-=(*i);
 
     delete i, aux, arrAux;
+
 }
 main()
 {
@@ -86,7 +87,8 @@ main()
     cout << "Vetor após a troca: ";
     exibir(arr);
 
-    delete arr;
+    delete[] arr;
+
 
 }
 

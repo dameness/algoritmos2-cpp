@@ -16,7 +16,7 @@ assim sucessivamente)
 OBS: as opções 2, 3 e 4 só poderão ser acionadas após a execução da opção 1 (mostrar mensagem com
 tratamento deste erro), tratar opção inválida no menu.
 */
-void exibir(int (*&m)[5], int *l) // passagem do ponteiro por referência, para que seja modificado no main()
+void exibir(int (*m)[5], int *l)
 {
     int *i = new int, *j = new int;
     cout << endl;
@@ -34,8 +34,9 @@ void exibir(int (*&m)[5], int *l) // passagem do ponteiro por referência, para 
     system("pause");
     delete i, j;
 }
-void gerar(int (*&m)[5], int *l)
-{
+void gerar(int (*&m)[5], int *l) // & pois sem ele, manipulamos o ponteiro da função, não o ponteiro dentro do main
+{                                // por isso é necessária uma passagem por referência
+                                // nos exercícios anteriores, chamo uso o ponteiro da função e passo ele para outras funções, por isso não encontrei esse problema
     int *i = new int, *j = new int;
 
     do
@@ -63,7 +64,7 @@ void gerar(int (*&m)[5], int *l)
 
     delete i, j;
 }
-void soma(int *somador, int (*m)[5], int *l)
+void soma(int *somador, int (*&m)[5], int *l)
 {
     int *i = new int, *j = new int;
 

@@ -16,48 +16,208 @@ um)
 mensagem de contato inexistente)
 */
 
-struct contato{ // criar vetor de struct com muitas posições para comportar
-    int numero;
+struct contato{
+    string numero;
     string nome;
 };
 
-void cadastrarContato(ofstream escrever, contato pessoas[], int posicaoPessoa){
+void lerAgenda(ifstream &ler, contato pessoas[], int &proximaPessoa){
+    ler.open("agenda.txt", ios::in);
 
-    int validarNumero;
+    char infoTexto[50];
+    int cont=1;
 
-    cout << "\nInforme um número de telefone: ";
-    cin >> validarNumero;
+    proximaPessoa=0;
+    if(ler.is_open()){
+        while(ler.getline(infoTexto, 50, ';')){
 
-    for(int i=0; i<posicaoPessoa; i++){
+            if(cont==1){
+                pessoas[proximaPessoa].nome = infoTexto;
+            }else if(cont==2){
+                pessoas[proximaPessoa].nome = infoTexto;
+                cont=1;
+                proximaPessoa++;
+            }
+        }
+    }
+    ler.close();
+}
+void gravarAgenda(ofstream &escrever, contato pessoas[], int proximaPessoa){
+     escrever.open("agenda.txt", ios::out);
+
+    if(escrever.is_open()){
+
+        for(int i=0; i<proximaPessoa; i++)
+            escrever << pessoas[i].nome << ";" << pessoas[i].numero << "\n";
+
+    }
+
+    escrever.close();
+}
+void cadastrarContato(contato pessoas[], int &proximaPessoa){
+
+    string validarNumero;
+    int s = validarNumero.size();
+    bool ok;
+
+    do{
+        ok=1;
+        cout << "\nInforme um número de telefone: ";
+        fflush(stdin);
+        getline(cin, validarNumero);
+
+        for(int i=0; i<s; i++){
+            if(!isdigit(validarNumero[i])){
+                ok=0;
+                cout << "\nInválido\n";
+                getchar();
+                break;
+            }
+        }
+
+    }while(!ok);
+
+
+    for(int i=0; i<proximaPessoa; i++){
 
         if(pessoas[i].numero == validarNumero){
-            cout << "\nEsse número já existe!\n"
+            cout << "\nEsse número já existe!\n";
             getchar();
             return;
-        }else if(i == posicaoPessoa-1)
-            pessoas[posicaoPessoa].numero = validarNumero;
+        }else if(i == proximaPessoa-1)
+            pessoas[proximaPessoa].numero = validarNumero;
 
     }
 
     cout << "\nInforme seu nome: ";
-    getline(cin, pessoas[posicaoPessoa].nome);
+    fflush(stdin);
+    getline(cin, pessoas[proximaPessoa].nome);
 
-    escrever.open("agenda.txt", ios::app);
-    escrever << pessoas[posicaoPessoa].nome << ";" << pessoas[posicaoPessoa].numero << "\n";
-    escrever.close();
-}
-void excluirContato(){
+    proximaPessoa++;
 
 }
-void consultarContato(){
+void excluirContato(contato pessoas[], int &proximaPessoa){
 
+     string validarNumero;
+    int s = validarNumero.size();
+    bool ok;
+
+    do{
+        ok=1;
+        cout << "\nInforme um número de telefone: ";
+        fflush(stdin);
+        getline(cin, validarNumero);
+
+        for(int i=0; i<s; i++){
+            if(!isdigit(validarNumero[i])){
+                ok=0;
+                cout << "\nInválido\n";
+                getchar();
+                break;
+            }
+        }
+
+    }while(!ok);
+
+
+
+    int posicaoExcluir;
+    for(int i=0; i<proximaPessoa; i++){
+
+        if(pessoas[i].numero == validarNumero){
+            posicaoExcluir = i;
+            break;
+        }else if(i == proximaPessoa-1){
+            cout << "\nEsse número não existe!\n";
+            getchar();
+            return;
+        }
+    }
+
+    proximaPessoa--;
+    struct contato pessoasAux[proximaPessoa];
+
+    int i=0, j=0;
+    while(i<proximaPessoa){
+        if(j==posicaoExcluir)
+            j++;
+
+        pessoasAux[i] = pessoas[j];
+
+        i++;
+        j++;
+    }
+    for(int i=0; i<proximaPessoa; i++)
+        pessoas[i] = pessoasAux[i];
 }
-void mostrarContatos(){
+void consultarContato(contato pessoas[], int proximaPessoa){
 
+    string nome;
+    cout << "\nInforme o nome do contato: ";
+    fflush(stdin);
+    getline(cin, nome);
+
+    bool ok=0;
+
+    for(int i=0; i<proximaPessoa; i++){
+
+        if(nome==pessoas[i].nome){
+            cout << pessoas[i].nome << " - " << pessoas[i].numero << "\n";
+            ok=1;
+        }else if(i==proximaPessoa-1 && !ok){
+            cout << "\nNenhum contato com esse nome!\n";
+        }
+    }
+
+    cout << endl;
+    getchar();
+}
+void mostrarContatos(contato pessoas[], int proximaPessoa){
+
+  cout << "\nContatos:\n\n";
+  for(int i=0; i<proximaPessoa; i++){
+    cout << pessoas[i].nome << " - " << pessoas[i].numero << "\n";
+  }
+
+  cout << endl;
+  getchar();
 }
 main(){
     setlocale(LC_ALL, "Portuguese");
+    ofstream escrever;
+    ifstream ler;
+    struct contato pessoas[100]; // limite de 100 pessoas na agenda
+    int proximaPessoa;
 
-    struct contato pessoas[100]; // limite de 100 pessoas
+    lerAgenda(ler, pessoas, proximaPessoa);
 
+    int op;
+    do{
+        system("cls");
+
+        cout << "0 - sair\n1 - cadastrar contato\n2 - mostrar contatos\n3 - consultar\n4 - excluir\n\n\topção: ";
+        cin >> op;
+        fflush(stdin);
+
+        if(op<0 || op>4){
+            cout << "\nOpção inválida\n";
+            getchar();
+        }else if(op==0){
+            gravarAgenda(escrever, pessoas, proximaPessoa);
+            cout << "\nVocê sairá do programa!\n";
+        }else if(op==1){
+            cadastrarContato(pessoas, proximaPessoa);
+            gravarAgenda(escrever, pessoas, proximaPessoa);
+        }else if(op==2){
+            mostrarContatos(pessoas, proximaPessoa);
+        }else if(op==3){
+            consultarContato(pessoas, proximaPessoa);
+        }else if(op==4){
+            excluirContato(pessoas, proximaPessoa);
+            gravarAgenda(escrever, pessoas, proximaPessoa);
+        }
+    }while(op!=0 && proximaPessoa<100);
+
+    if(proximaPessoa>100)
+        cout << "\nLimite de pessoas excedido!\n";
 }

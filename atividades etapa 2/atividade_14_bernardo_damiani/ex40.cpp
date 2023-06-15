@@ -111,11 +111,11 @@ void mostrarMedias(info alunos[], int proximoAluno){
     }else{
         float mediaAluno;
         cout << "\nAlunos:\n\n";
-        cout << "Média\tAluno\n\n";
 
         for(int i=0; i<proximoAluno; i++){
             mediaAluno = (alunos[i].nota1 + alunos[i].nota2 + alunos[i].nota3)/3.0;
-            cout << mediaAluno << "\t" << alunos[i].nome << "\n";
+            cout << alunos[i].nome << "\n";
+            cout << "Média: " << mediaAluno<< "\n\n";
         }
         cout << "\n";
         system("pause");

@@ -222,6 +222,6 @@ main(){
         }
     }while(op!=0 && proximaPessoa<100);
 
-    if(proximaPessoa>100)
-        cout << "\nO limite de pessoas foi excedido!\n";
+    if(proximaPessoa>=100)
+        cout << "\nO limite de pessoas foi alcançado!\n";
 }
